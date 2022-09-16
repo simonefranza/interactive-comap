@@ -1,38 +1,73 @@
 <template>
+  {{toggled}}tog
   <div class="map-container">
     <svg ref="canvas" class="map" preserveAspectRatio="xMinYMin">
-      <map-node 
-        v-for="node in nodes" 
+      <link-component
+        v-for="conn in activeConnections"
+        :key="conn.source + conn.target"
+        :source="getComponent(conn, 'source')"
+        :target="getComponent(conn, 'target')"
+      >
+      </link-component>
+      <map-node-component
+        v-for="node in activeNodes" 
         :key="node.title"
-        :title="node.title"
-        :description="node.description"
-        :toggler="node.toggler"
-      ></map-node>
+        :node="node"
+        :connections="getNodeConnections(node)"
+        @interaction="emitInteraction"
+        ref="nodeComponents"
+      ></map-node-component>
     </svg>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from 'vue';
-import MapNode from './MapNode.vue';
+import { ref, computed } from 'vue';
+import MapNodeComponent from './MapNode.vue';
+import LinkComponent from './LinkComponent.vue';
 
-interface Node {
-  title: string,
-  description: string,
-  toggler: string,
-  nx: number,
-  ny: number,
-}
-interface Connection {
-  source: string,
-  target: string,
-}
+const emit = defineEmits<{
+  (e: 'interaction', interaction: Interaction): void,
+}>();
 
 const props = defineProps<{
-  nodes: Node[],
+  nodes: MapNode[],
   connections: Connection[],
   toggled: string[],
 }>();
+
+const nodeComponents = ref([]);
+
+const activeNodes = computed(() => { 
+  return props.nodes.filter((el) => {
+    return props.toggled.includes(el.toggler);
+  })
+});
+
+const activeConnections = computed(() => {
+  return props.connections.filter((conn) => {
+    return activeNodes.value.find((node) => conn.source === node.title) &&
+      activeNodes.value.find((node) => conn.target === node.title) && 
+      nodeComponents.value.find((nodeComp : NodeComponent) => 
+      nodeComp.node.title == conn.target || nodeComp.node.title == conn.source);
+  })
+});
+
+const getNodeConnections = (node : MapNode) => {
+  return activeConnections.value.filter((conn) => {
+    return conn.target === node.title || conn.source === node.title;
+  });
+}
+const getComponent = (conn : Connection, field : 'source' | 'target') => {
+  return nodeComponents.value.find((nodeComp : NodeComponent) => {
+    return nodeComp.node.title === conn[field];
+  });
+}
+
+const emitInteraction = (data : Interaction) => {
+  console.log(data);
+  emit('interaction', data);
+};
 </script>
 
 

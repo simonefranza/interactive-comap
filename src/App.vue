@@ -1,100 +1,113 @@
 <template>
-  <InteractiveComap :nodes="nodes" :connections="connections" :toggled="toggled"/>
+  <div class="container">
+    <span class="toolbar-container">
+      <toolbar-component 
+        :possibleToggles="possibleToggles"
+        :selectedToggles="toggled"
+        @togglesChanged="updateToggles"
+      ></toolbar-component>
+    </span>
+    <span class="comap-container">
+      <interactive-comap
+        :nodes="nodes" 
+        :connections="connections" 
+        :toggled="toggledCopy"
+        @interaction="handleInteraction"
+      />
+    </span>
+    <div class="interactions-container">
+      <div class="interactions-title">Interactions</div>
+      <p v-html="formattedInteractions">
+      </p>
+    </div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import InteractiveComap from './components/InteractiveComap.vue'
+<script setup lang="ts">
+import { ref, reactive, computed, onMounted } from 'vue';
+import InteractiveComap from './components/InteractiveComap.vue';
+import ToolbarComponent from './components/ToolbarComponent.vue';
+import { nodes, connections, toggled } from '../public/data';
 
-export default defineComponent({
-  components: {
-    InteractiveComap,
-  },
-  data() {
-    return {
-      nodes: [
-        {
-          "title": "binary",
-          "description": "a pre-compiled, pre-linked program that is ready to run under a given operating system",
-          "toggler": "a",
-          "nx": 461.0706787109375,
-          "ny": -287.7810974121094
-        },
-        {
-          "title": "program",
-          "description": "a sequence of instructions that a computer can interpret and execute",
-          "toggler": "b",
-          "nx": 461.0706787109375,
-          "ny": -287.7810974121094
-        },
-        {
-          "title": "instruction",
-          "description": "a line of code written as part of a computer program",
-          "toggler": "b",
-          "nx": 461.0706787109375,
-          "ny": -287.7810974121094
-        },
-        {
-          "title": "compiler",
-          "description": "a program that decodes instructions written in a higher order language and produces an assembly language program",
-          "toggler": "b",
-          "nx": 461.0706787109375,
-          "ny": -287.7810974121094
-        },
-        {
-          "title": "parser",
-          "description": "a computer program that divides code up into functional components",
-          "toggler": "b",
-          "nx": 461.0706787109375,
-          "ny": -287.7810974121094
-        },
-        
-        {
-          "title": "computer science",
-          "description": "the branch of engineering science that studies computable processes and structures",
-          "toggler": "c",
-          "nx": 461.0706787109375,
-          "ny": -287.7810974121094
-        },
-      ],
-      connections: [
-        {
-          source: 'binary',
-          target: 'program',
-        },
-        {
-          source: 'program',
-          target: 'instruction',
-        },
-        {
-          source: 'program',
-          target: 'compiler',
-        },
-        {
-          source: 'program',
-          target: 'parser',
-        },
-        {
-          source: 'parser',
-          target: 'compiler',
-        },
-        {
-          source: 'program',
-          target: 'computer science',
-        },
-      ],
-      toggled: [ 'a', 'b', 'c' ],
-    };
-  },
+const interactions : string[] = reactive([]);
+let toggledCopy = ref([...toggled.value]);
+
+const handleInteraction = ({type, node, data} : Interaction) => {
+  console.log(type, data);
+  const date = new Date().toLocaleDateString("de-AT", 
+    {hour:"numeric", minute:"numeric", second:"numeric"});
+  interactions.push(`${date} - [${type}${node ? ':' + node : ''}]${data ? ": " + data : ''}`);
+}
+
+const possibleToggles = ref<string[]>([]);
+
+
+const formattedInteractions = computed(() => {
+  return interactions.join('<br />');
+});
+
+const updateToggles = (data : string[]) => {
+  console.log('update', data);
+  toggledCopy.value.splice(0, toggledCopy.value.length);
+  toggledCopy.value.push(...data);
+}
+onMounted(() => {
+  nodes.value.forEach((node) => {
+    if (possibleToggles.value.includes(node.toggler)) {
+      return;
+    }
+    possibleToggles.value.push(node.toggler);
+    });
 });
 </script>
 
-<style>
+<style lang="scss">
 body, #app {
   height: 100vh;
   width: 100vw;
   padding: 0;
   margin: 0;
   position: relative;
+}
+.container {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-areas: "toolbar toolbar" "map interactions";
+  grid-template-rows: 100px 1fr;
+  grid-template-columns: 2fr 1fr;
+}
+.toolbar-container {
+  grid-area: toolbar;
+}
+.interactions-container {
+  border-radius: 1rem;
+  grid-area: interactions;
+  background: #eee;
+  color: #000;
+  overflow: scroll;
+  margin: 1rem;
+  padding-inline: 0.5rem;
+  & p {
+    text-align: left;
+    max-height: 100%;
+  }
+}
+.comap-container {
+  grid-area: map;
+  outline: 1px solid #eee;
+  border-radius:1rem;
+  margin: 1rem;
+}
+.interactions-title {
+  background: #eee;
+  text-transform: capitalize;
+  font-weight: bold;
+  position: sticky;
+  font-size: 1.5rem;
+  padding-block: 0.5rem;
+  top: 0;
 }
 </style>
