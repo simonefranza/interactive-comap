@@ -3,14 +3,14 @@ export const nodes = ref<MapNode[]>([
   {
     "title": "binary",
     "description": "a pre-compiled, pre-linked program that is ready to run under a given operating system",
-    "toggler": "a",
+    "toggler": "c",
     "nx": 82.7491455078125,
     "ny": 176.86184120178223
   },
   {
     "title": "program",
     "description": "a sequence of instructions that a computer can interpret and execute",
-    "toggler": "a",
+    "toggler": "d",
     "nx": 238.15523147583008,
     "ny": 258.28253173828125,
   },
@@ -39,9 +39,9 @@ export const nodes = ref<MapNode[]>([
   {
     "title": "computer science",
     "description": "the branch of engineering science that studies computable processes and structures",
-    "toggler": "c",
-    "nx": 461.0706787109375,
-    "ny": -287.7810974121094
+    "toggler": "a",
+    "nx": 281.75140380859375,
+    "ny": 420.69657995352836
   },
 ]);
 export const connections = ref<Connection[]>([
@@ -70,4 +70,4 @@ export const connections = ref<Connection[]>([
     target: 'computer science',
   },
 ]);
-export const toggled = ref([ 'a', 'b' ]);
+export const toggled = ref([ 'c', 'd', 'a', 'b' ]);

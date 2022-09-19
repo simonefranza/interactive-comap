@@ -2,6 +2,10 @@ type Events = {
   click: undefined,
 };
 
+type ZoomPanEvents = {
+  zoomPanInteraction: Interaction,
+};
+
 type MapNode = {
   title: string,
   description: string,

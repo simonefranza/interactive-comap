@@ -25,6 +25,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue';
+
+
 import InteractiveComap from './components/InteractiveComap.vue';
 import ToolbarComponent from './components/ToolbarComponent.vue';
 import { nodes, connections, toggled } from '../public/data';
@@ -33,7 +35,6 @@ const interactions : string[] = reactive([]);
 let toggledCopy = ref([...toggled.value]);
 
 const handleInteraction = ({type, node, data} : Interaction) => {
-  console.log(type, data);
   const date = new Date().toLocaleDateString("de-AT", 
     {hour:"numeric", minute:"numeric", second:"numeric"});
   interactions.push(`${date} - [${type}${node ? ':' + node : ''}]${data ? ": " + data : ''}`);

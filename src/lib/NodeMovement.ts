@@ -17,7 +17,7 @@ export class NodeMovement {
   pointerUpHandler: () => void;
 
   constructor(canvas : HTMLElement, node : SVGForeignObjectElement, emitter : Emitter<Events>, 
-   emitInteraction: Function) {
+   emitInteraction: (int: Interaction) => void) {
     this.canvas = canvas;
     this.node = node;
     this.nodeEmitter = emitter;
@@ -29,11 +29,12 @@ export class NodeMovement {
   }
 
   handlePointerDown(event : PointerEvent) {
-    console.log(event);
+    console.log('node', event);
     this.saveStartPosition(event);
     this.moveNodeToFront();
     document.addEventListener('pointermove', this.pointerMovedHandler);
     document.addEventListener('pointerup', this.pointerUpHandler);
+    event.cancelBubble = true;
   };
 
   saveStartPosition(e : PointerEvent) {

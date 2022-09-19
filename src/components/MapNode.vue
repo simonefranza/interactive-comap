@@ -24,6 +24,7 @@ const emitter = mitt<Events>();
 emitter.on('click', changeClicked);
 const emit = defineEmits<{
   (e: 'interaction', interaction: Interaction): void,
+  (e: 'mounted'):void,
 }>();
 
 const props = defineProps<{
@@ -38,7 +39,6 @@ const nodeDiv = ref<InstanceType<typeof HTMLElement>>();
 let canvas : HTMLElement;
 
 async function changeClicked() {
-  console.log("clicked");
   clicked.value = !clicked.value;
   await nextTick();
   let viewBox = canvas.getAttribute("viewBox");
@@ -143,6 +143,7 @@ onMounted(() => {
   setSvgSize(viewBoxSplit, bounding);
   setSvgPosition(viewBoxSplit, bounding);
   movementHandler = new NodeMovement(canvas, nodeContainer.value!, emitter, emitInteraction);
+  emit('mounted');
 });
 </script>
   

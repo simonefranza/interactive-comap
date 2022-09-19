@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, reactive } from 'vue';
+import { ref, onMounted, computed, reactive, onBeforeUnmount } from 'vue';
 import MapNodeComponent from './MapNode.vue';
 
 const props = defineProps<{
@@ -42,18 +42,18 @@ const computePositions = () => {
   targetPos.y = parseFloat(props.target?.nodeContainer.getAttribute('y')) + targetHeight / 2;
 };
 
+const observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+    if (mutation.type === "attributes") {
+      computePositions();
+    }
+  });
+});
 onMounted(() => {
-  if (link.value === undefined) {
+  if (link.value === undefined || props.source === undefined || props.target === undefined) {
     return;
   }
   computePositions();
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === "attributes") {
-        computePositions();
-      }
-    });
-  });
 
   observer.observe(props.source?.nodeContainer, {
     attributes: true //configure it to listen to attribute changes
@@ -61,6 +61,10 @@ onMounted(() => {
   observer.observe(props.target?.nodeContainer, {
     attributes: true //configure it to listen to attribute changes
   });
+});
+
+onBeforeUnmount(() => {
+  observer.disconnect();
 });
 </script>
 

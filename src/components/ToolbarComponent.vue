@@ -22,18 +22,13 @@ const emit = defineEmits<{
 let model : Boolean[] = reactive([]);
 
 watch(props.possibleToggles, () => {
-  console.log('avail', props.possibleToggles);
   model.splice(0, model.length);
   props.possibleToggles.forEach((tog) => {
-    console.log("pos", tog);
     model.push(false);
   });
-  console.log(model.length);
   props.selectedToggles.forEach((tog) => {
-    console.log(props.possibleToggles.findIndex((el) => el === tog));
     model[props.possibleToggles.findIndex((el) => el === tog)] = true;
   });
-  console.log(model.length);
 });
 
 watch(model, () => {
@@ -42,14 +37,11 @@ watch(model, () => {
     if (!el) return;
     els.push(props.possibleToggles[idx]);
   });
-  console.log('emitting', els);
   emit('togglesChanged', els);
 });
 
 onMounted(() => {
-  console.log('mounted', props.selectedToggles);
   props.possibleToggles.forEach((tog) => {
-    console.log("pos", tog);
     model.push(false);
   });
 });
