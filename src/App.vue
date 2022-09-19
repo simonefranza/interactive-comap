@@ -25,8 +25,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue';
-
-
 import InteractiveComap from './components/InteractiveComap.vue';
 import ToolbarComponent from './components/ToolbarComponent.vue';
 import { nodes, connections, toggled } from '../public/data';
