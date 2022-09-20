@@ -3,70 +3,69 @@ export const nodes = [
     "title": "binary",
     "description": "a pre-compiled, pre-linked program that is ready to run under a given operating system",
     "toggler": "c",
-    "nx": 82.7491455078125,
-    "ny": 176.86184120178223
+    "nx": 121.30030822753906,
+    "ny": 63.5488224029541
   },
   {
     "title": "program",
     "description": "a sequence of instructions that a computer can interpret and execute",
     "toggler": "d",
-    "nx": 238.15523147583008,
-    "ny": 258.28253173828125,
+    "nx": 263.9640693664551,
+    "ny": 138.99618530273438
   },
   {
     "title": "instruction",
     "description": "a line of code written as part of a computer program",
     "toggler": "b",
-    "nx": 124.95005798339844,
-    "ny":  395.1403293609619,
+    "nx": 87.08744812011719,
+    "ny": 220.1719150543213
   },
   {
     "title": "compiler",
     "description": "a program that decodes instructions written in a higher order language and produces an assembly language program",
     "toggler": "b",
-    "nx": 423.8379898071289,
-    "ny": 320.0327339172363 
+    "nx": 447.61100006103516,
+    "ny": 150.25969314575195
   },
   {
     "title": "parser",
     "description": "a computer program that divides code up into functional components",
     "toggler": "b",
-    "nx": 330.3810272216797,
-    "ny": 167.31288528442383,
+    "nx": 350.7620086669922,
+    "ny": 37.17207717895508
   },
-  
   {
     "title": "computer science",
     "description": "the branch of engineering science that studies computable processes and structures",
     "toggler": "a",
-    "nx": 281.75140380859375,
-    "ny": 420.69657995352836
-  },
+    "nx": 307.8663330078125,
+    "ny": 237.457963010169
+  }
 ];
 export const connections = [
   {
-    source: 'binary',
-    target: 'program',
+    "source": "binary",
+    "target": "program"
   },
   {
-    source: 'program',
-    target: 'instruction',
+    "source": "program",
+    "target": "instruction"
   },
   {
-    source: 'program',
-    target: 'compiler',
+    "source": "program",
+    "target": "compiler"
   },
   {
-    source: 'program',
-    target: 'parser',
+    "source": "program",
+    "target": "parser"
   },
   {
-    source: 'parser',
-    target: 'compiler',
+    "source": "parser",
+    "target": "compiler"
   },
   {
-    source: 'program',
-    target: 'computer science',
-  },
+    "source": "program",
+    "target": "computer science"
+  }
 ];
-export const toggled = [ 'c', 'd', 'a', 'b' ];
+export const toggled = [ 'a', 'b', 'c', 'd' ];

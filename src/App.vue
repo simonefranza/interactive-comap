@@ -3,10 +3,16 @@
     <span class="toolbar-container">
       <toolbar-component 
         :possibleToggles="possibleToggles"
-        :selectedToggles="toggled"
+        :selectedToggles="toggledCopy"
+        :nodes="usedNodes"
+        :connections="usedConnections"
         @togglesChanged="updateToggles"
         @newData="updateData"
         @downloadFile="downloadFile"
+        @removeNode="removeNode"
+        @addNode="addNode"
+        @removeConnection="removeConnection"
+        @addConnection="addConnection"
       ></toolbar-component>
     </span>
     <span class="comap-container">
@@ -27,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue';
+import { ref, reactive, computed, onMounted, watch } from 'vue';
 import InteractiveComap from './components/InteractiveComap.vue';
 import ToolbarComponent from './components/ToolbarComponent.vue';
 import { nodes, connections, toggled } from '../public/data';
@@ -61,13 +67,11 @@ const parseToggles = (nodes : MapNode[]) => {
 }
 
 const updateToggles = (data : string[]) => {
-  console.log('update', data);
   toggledCopy.value.splice(0, toggledCopy.value.length);
   toggledCopy.value.push(...data);
 };
 
 const updateData = (data: UserData) => {
-  parseToggles(data.nodes);
   usedNodes.value = data.nodes;
   usedConnections.value = data.connections;
 };
@@ -100,6 +104,35 @@ function downloadFile() {
   link.remove();
 }
 
+function removeNode(node: MapNode) {
+  const idx = usedNodes.value.findIndex((el) => el.title === node.title);
+  usedNodes.value.splice(idx, 1);
+  for (let i = usedConnections.value.length - 1; i >=0; i--) {
+    if (usedConnections.value[i].source === node.title || 
+        usedConnections.value[i].target === node.title) {
+      usedConnections.value.splice(i, 1);
+    }
+  }
+}
+
+function addNode(node: MapNode) {
+  usedNodes.value.push(node);
+}
+
+function removeConnection(conn: Connection) {
+  const idx = usedConnections.value.findIndex((el) => 
+    el.source === conn.source && el.target === conn.target);
+  usedConnections.value.splice(idx, 1);
+}
+
+function addConnection(conn: Connection) {
+  console.log(conn);
+  usedConnections.value.push(conn);
+}
+
+watch(usedNodes.value, () => {
+  parseToggles(usedNodes.value);
+});
 onMounted(() => {
   parseToggles(nodes);
 });
@@ -120,7 +153,7 @@ body, #app {
   margin: 0;
   display: grid;
   grid-template-areas: "toolbar" "map" "interactions";
-  grid-template-rows: 150px 1fr 200px;
+  grid-template-rows: 200px 1fr 150px;
   grid-template-columns: 1fr;
 }
 .toolbar-container {
