@@ -10,12 +10,11 @@
       >
       </link-component>
       <map-node-component
-        v-for="(node, idx) in activeNodes" 
-        :key="idx"
+        v-for="node in activeNodes" 
+        :key="node.title"
         :node="node"
         :connections="getNodeConnections(node)"
         @interaction="emitInteraction"
-        @mounted="log"
         ref="nodeComponents"
       ></map-node-component>
     </svg>
@@ -27,12 +26,8 @@ import {  onBeforeUnmount, ref, computed, onMounted, nextTick, reactive, watch }
 import MapNodeComponent from './MapNode.vue';
 import LinkComponent from './LinkComponent.vue';
 import { ZoomPanManager } from '../lib/ZoomPanManager';
+import { defaultStyle } from '../lib/defaultStyles';
 import mitt, { Emitter } from 'mitt';
-
-async function log() {
-  await nextTick();
-  //console.log("test", nodeComponents.value);
-}
 
 const emit = defineEmits<{
   (e: 'interaction', interaction: Interaction): void,
@@ -42,6 +37,7 @@ const props = defineProps<{
   nodes: MapNode[],
   connections: Connection[],
   toggled: string[],
+  nodeStyle: 'custom' | 'default',
 }>();
 
 const emitter = mitt<ZoomPanEvents>();
@@ -102,9 +98,19 @@ watch(props.toggled, () => {
 
 });
 
+
+function addDefaultStyle() {
+  const style = document.createElement('style');
+  style.innerHTML = defaultStyle;
+  document.head.appendChild(style);
+}
+
 onMounted(() => {
   zoomPanManager = new ZoomPanManager(canvas.value, emitter);
   emitter.on('zoomPanInteraction', emitInteraction);
+  if (props.nodeStyle === 'default') {
+    addDefaultStyle();
+  }
 });
 
 onBeforeUnmount(() => {

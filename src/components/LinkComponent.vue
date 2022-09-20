@@ -1,5 +1,5 @@
 <template>
-  <path ref="link" stroke="violet" stroke-width="3px" fill="transparent"  :d="path">
+  <path ref="link" class="node-link" :d="path">
   </path>
 </template>
 

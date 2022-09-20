@@ -41,3 +41,8 @@ type Interaction = {
   node?: string,
   data?: string,
 }
+
+type UserData = {
+  nodes: MapNode[],
+  connections: Connection[],
+}

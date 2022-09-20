@@ -4,7 +4,7 @@
     class="map-node-container">
     <div 
       ref="nodeDiv"
-      :class="['map-node', {'clicked' : clicked}, {'opened' : opened}]">
+      :class="['map-node', {'clicked' : clicked}, {'old' : old}]">
       <span>
         <div :class="['node-title', {'clicked' : clicked}]">{{node.title}}</div>
         <div class="node-description" v-if="clicked">{{node.description}}
@@ -24,7 +24,6 @@ const emitter = mitt<Events>();
 emitter.on('click', changeClicked);
 const emit = defineEmits<{
   (e: 'interaction', interaction: Interaction): void,
-  (e: 'mounted'):void,
 }>();
 
 const props = defineProps<{
@@ -33,7 +32,7 @@ const props = defineProps<{
 }>();
 
 let clicked = ref(false);
-let opened = ref(false);
+let old = ref(false);
 const nodeContainer = ref<InstanceType<typeof SVGForeignObjectElement>>();
 const nodeDiv = ref<InstanceType<typeof HTMLElement>>();
 let canvas : HTMLElement;
@@ -65,7 +64,7 @@ async function changeClicked() {
     type: clicked.value === true ? 'openedNode' : 'closedNode', 
     node: props.node.title
   });
-  opened.value = true;
+  old.value = true;
 };
 
 let movementHandler : NodeMovement;
@@ -111,8 +110,8 @@ const setSvgPosition = (viewBoxSplit : [number, number, number, number], boundin
     props.node.ny 
   );
   const position = {x, y};
-  nodeContainer.value.setAttribute("x", `${position.x}`);
-  nodeContainer.value.setAttribute("y", `${position.y}`);
+  nodeContainer.value.setAttribute("x", `${props.node.nx}`);
+  nodeContainer.value.setAttribute("y", `${props.node.ny}`);
 }
 
 const emitInteraction = (int : Interaction) => {
@@ -143,7 +142,7 @@ onMounted(() => {
   setSvgSize(viewBoxSplit, bounding);
   setSvgPosition(viewBoxSplit, bounding);
   movementHandler = new NodeMovement(canvas, nodeContainer.value!, emitter, emitInteraction);
-  emit('mounted');
+
 });
 </script>
   
@@ -156,36 +155,5 @@ onMounted(() => {
   user-select: none;
   overflow: visible;
   cursor: pointer;
-}
-.map-node {
-  position: static;
-  box-sizing: border-box;
-  font-family: monospace;
-  display: inline-block;
-  color: #eee;
-  pointer-events: none;
-  border-radius: 0.5rem;
-  background-image: linear-gradient(133deg, salmon, #5f0b83);
-  //background-color: darkviolet;
-  padding-block: 0.5rem;
-  padding-inline: 1.2rem;
-  max-width: 300px;
-  //outline: 1px solid mediumvioletred;
-  outline: 1px solid palevioletred;
-  &.opened {
-    background-image: linear-gradient(133deg, darkviolet, #5f0b83);
-  }
-  &.clicked {
-    //background-color: mediumvioletred;
-    background-image: linear-gradient(73deg, darkviolet, #5f0b83);
-    outline: 1px solid darkviolet;
-  }
-}
-.node-title.clicked {
-  font-weight: bold;
-  text-transform: uppercase;
-}
-.node-description {
-  text-align: left;
 }
 </style>

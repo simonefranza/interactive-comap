@@ -5,13 +5,16 @@
         :possibleToggles="possibleToggles"
         :selectedToggles="toggled"
         @togglesChanged="updateToggles"
+        @newData="updateData"
+        @downloadFile="downloadFile"
       ></toolbar-component>
     </span>
     <span class="comap-container">
       <interactive-comap
-        :nodes="nodes" 
-        :connections="connections" 
+        :nodes="usedNodes" 
+        :connections="usedConnections" 
         :toggled="toggledCopy"
+        :nodeStyle="'default'"
         @interaction="handleInteraction"
       />
     </span>
@@ -30,7 +33,9 @@ import ToolbarComponent from './components/ToolbarComponent.vue';
 import { nodes, connections, toggled } from '../public/data';
 
 const interactions : string[] = reactive([]);
-let toggledCopy = ref([...toggled.value]);
+const toggledCopy = ref([...toggled]);
+const usedNodes = ref([...nodes]);
+const usedConnections = ref([...connections]);
 
 const handleInteraction = ({type, node, data} : Interaction) => {
   const date = new Date().toLocaleDateString("de-AT", 
@@ -45,18 +50,58 @@ const formattedInteractions = computed(() => {
   return interactions.join('<br />');
 });
 
-const updateToggles = (data : string[]) => {
-  console.log('update', data);
-  toggledCopy.value.splice(0, toggledCopy.value.length);
-  toggledCopy.value.push(...data);
-}
-onMounted(() => {
-  nodes.value.forEach((node) => {
+const parseToggles = (nodes : MapNode[]) => {
+  possibleToggles.value.splice(0, possibleToggles.value.length);
+  nodes.forEach((node) => {
     if (possibleToggles.value.includes(node.toggler)) {
       return;
     }
     possibleToggles.value.push(node.toggler);
-    });
+  });
+}
+
+const updateToggles = (data : string[]) => {
+  console.log('update', data);
+  toggledCopy.value.splice(0, toggledCopy.value.length);
+  toggledCopy.value.push(...data);
+};
+
+const updateData = (data: UserData) => {
+  parseToggles(data.nodes);
+  usedNodes.value = data.nodes;
+  usedConnections.value = data.connections;
+};
+
+function downloadFile() {
+  const data = { nodes: [...usedNodes.value], connections: [...usedConnections.value]};
+  const htmlNodes = document.querySelectorAll('.map-node-container');
+  htmlNodes.forEach((el) => {
+    const title = el.querySelector('.node-title')?.innerHTML;
+    const node = data.nodes.find((node) => node.title === title);
+    if (node === undefined) {
+      throw "Node is undefined";
+    }
+    const x = el.getAttribute('x');
+    const y = el.getAttribute('y');
+    if (x === null || y === null) {
+      throw "x or y attribute is null";
+    }
+    node.nx = parseFloat(x);
+    node.ny = parseFloat(y);
+  });
+
+  const blob = new Blob([JSON.stringify(data, null, 2)]);
+  const link = document.createElement("a");
+  link.style.display = "none";
+  link.href = window.URL.createObjectURL(blob);
+  link.download = 'data.json';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
+onMounted(() => {
+  parseToggles(nodes);
 });
 </script>
 
@@ -74,9 +119,9 @@ body, #app {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-areas: "toolbar toolbar" "map interactions";
-  grid-template-rows: 100px 1fr;
-  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "toolbar" "map" "interactions";
+  grid-template-rows: 150px 1fr 200px;
+  grid-template-columns: 1fr;
 }
 .toolbar-container {
   grid-area: toolbar;
@@ -109,4 +154,40 @@ body, #app {
   padding-block: 0.5rem;
   top: 0;
 }
+</style>
+<style lang="scss">
+.map-node {
+  position: static;
+  box-sizing: border-box;
+  font-family: monospace;
+  display: inline-block;
+  color: #eee;
+  pointer-events: none;
+  border-radius: 1rem;
+  background: lightgoldenrodyellow;
+  padding-block: 0.5rem;
+  padding-inline: 1.2rem;
+  max-width: 300px;
+  outline: 1px solid palevioletred;
+}
+.map-node.old{
+  background-image: linear-gradient(133deg, darkviolet, #5f0b83);
+}
+.map-node.clicked {
+  background-image: linear-gradient(73deg, darkviolet, #5f0b83);
+  outline: 1px solid darkviolet;
+}
+.node-title.clicked {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.node-description {
+  text-align: left;
+}
+.node-link {
+  stroke: purple;
+  stroke-width: 10px;
+  fill: lightsteelblue;
+}
+
 </style>

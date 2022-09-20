@@ -1,5 +1,4 @@
-import { ref } from 'vue';
-export const nodes = ref<MapNode[]>([
+export const nodes = [
   {
     "title": "binary",
     "description": "a pre-compiled, pre-linked program that is ready to run under a given operating system",
@@ -43,8 +42,8 @@ export const nodes = ref<MapNode[]>([
     "nx": 281.75140380859375,
     "ny": 420.69657995352836
   },
-]);
-export const connections = ref<Connection[]>([
+];
+export const connections = [
   {
     source: 'binary',
     target: 'program',
@@ -69,5 +68,5 @@ export const connections = ref<Connection[]>([
     source: 'program',
     target: 'computer science',
   },
-]);
-export const toggled = ref([ 'c', 'd', 'a', 'b' ]);
+];
+export const toggled = [ 'c', 'd', 'a', 'b' ];
