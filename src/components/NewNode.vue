@@ -37,10 +37,10 @@ const emit = defineEmits<{
   (e: 'newNode', node: MapNode):void,
 }>();
 
-const title = ref();
-const description = ref();
-const toggler = ref();
-const selectedToggler = ref();
+const title = ref('');
+const description = ref('');
+const toggler = ref('');
+const selectedToggler = ref('');
 
 function addNode() {
   if (title.value.trim() === '') {
@@ -61,7 +61,7 @@ function addNode() {
   emit('newNode', node);
   title.value = '';
   description.value = '';
-  selectedToggler.value = undefined;
+  selectedToggler.value = '';
   toggler.value = '';
 }
 </script>
