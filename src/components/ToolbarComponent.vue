@@ -3,9 +3,9 @@
     <div class="file-manager">
       <span class="title">File Manager</span>
       <div class="file-upload">
-          <label for="file-uploader" class="btn btn-basic">
-            Upload Own Map 
-          </label>
+        <label for="file-uploader" class="btn btn-basic">
+          Upload Own Map 
+        </label>
         <input id="file-uploader" ref="fileInput" type="file" single />
         <div class="error-message" v-if="errorMessage !== ''">
           {{errorMessage}}
@@ -21,7 +21,7 @@
     </div>
     <div class="new-node-container">
       <new-connection :nodes="nodes" @newConnection="addConnection" >
-        </new-connection>
+      </new-connection>
     </div>
     <div class="list-container">
       <span class="title">Nodes</span>
@@ -75,7 +75,7 @@ const emit = defineEmits<{
   (e: 'addConnection', conn: Connection): void,
 }>();
 
-let model : { [key: string]: Boolean} = reactive({});
+let model : { [key: string]: boolean} = reactive({});
 const fileInput = ref();
 const errorMessage = ref('');
 const enableDownload = ref(false);
@@ -148,13 +148,22 @@ onMounted(() => {
     model[tog] = false;
   });
   fileInput.value.addEventListener("change", handleFiles, false);
-  function handleFiles() {
-    var reader = new FileReader();
-    reader.readAsText(this.files[0], "UTF-8");
+  function handleFiles(event : Event) {
+    if (event === null || event.target === null) {
+      return;
+    }
+    const reader = new FileReader();
+    const files = (event.target as HTMLInputElement).files;
+    if (files === undefined || files === null || files?.length < 1) {
+      return;
+    }
+    reader.readAsText(files[0], "UTF-8");
     reader.onload = function (evt : ProgressEvent) {
-      console.log('load', evt);
+      if (evt.target === null) {
+        return;
+      }
       try {
-        const parsed = JSON.parse(evt.target.result);
+        const parsed = JSON.parse(reader.result as string);
         const err = checkJson(parsed);
         if (err === null) {
           emit('newData', parsed);
@@ -168,7 +177,7 @@ onMounted(() => {
       }
     }
     reader.onerror = function (evt) {
-      console.log('err', evt);
+      errorMessage.value = evt.toString();
     }
   }
 });
@@ -236,8 +245,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
 }
-.file-download {
-}
 
 .new-node-container {
   position: relative;
@@ -251,7 +258,7 @@ onMounted(() => {
 }
 
 input[type="file"] {
-    display: none;
+  display: none;
 }
 .btn-basic {
   border-radius: 8px;

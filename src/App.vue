@@ -113,10 +113,12 @@ function removeNode(node: MapNode) {
       usedConnections.value.splice(i, 1);
     }
   }
+  parseToggles(usedNodes.value);
 }
 
 function addNode(node: MapNode) {
   usedNodes.value.push(node);
+  parseToggles(usedNodes.value);
 }
 
 function removeConnection(conn: Connection) {
@@ -126,11 +128,10 @@ function removeConnection(conn: Connection) {
 }
 
 function addConnection(conn: Connection) {
-  console.log(conn);
   usedConnections.value.push(conn);
 }
 
-watch(usedNodes.value, () => {
+watch(usedNodes, () => {
   parseToggles(usedNodes.value);
 });
 onMounted(() => {
