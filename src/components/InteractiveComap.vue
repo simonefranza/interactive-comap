@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import {  onBeforeUnmount, ref, computed, onMounted, nextTick, reactive, watch } from 'vue';
+import { onBeforeMount, onBeforeUnmount, ref, computed, onMounted, nextTick, reactive, watch } from 'vue';
 import MapNodeComponent from './MapNode.vue';
 import LinkComponent from './LinkComponent.vue';
 import { ZoomPanManager } from '../lib/ZoomPanManager';
@@ -57,12 +57,11 @@ const activeNodes = computed(() => {
 });
 
 const activeConnections = computed(() => {
-  const res = props.connections.filter((conn : Connection) => {
+  return props.connections.filter((conn : Connection) => {
     return activeNodes.value.find((node) => conn.source === node.title) &&
       activeNodes.value.find((node) => conn.target === node.title) && 
       existsComponent(conn);
   })
-  return res;
 });
 
 const getNodeConnections = (node : MapNode) => {
@@ -81,14 +80,21 @@ const existsComponent = (conn : Connection) : Boolean => {
 };
 
 
+watch(activeNodes, async () => {
+  await nextTick();
+  const temp = nodeComponents.value;
+  nodeComponents.value = [];
+  nodeComponents.value = temp;
+})
+
 const getComponent = (conn : Connection, field : 'source' | 'target') => {
-const res = nodeComponents.value.find((nodeComp : NodeComponent) => {
-  return nodeComp.node.title === conn[field];
-});
-if (res === undefined) {
-  throw `Could not find NodeComponent for connection ${conn.source}-${conn.target}`;
-}
-return res;
+  const res = nodeComponents.value.find((nodeComp : NodeComponent) => {
+    return nodeComp.node.title === conn[field];
+  });
+  if (res === undefined) {
+    throw `Could not find NodeComponent for connection ${conn.source}-${conn.target}`;
+  }
+  return res;
 }
 
 const emitInteraction = (data : Interaction) => {
@@ -105,7 +111,6 @@ watch(props.toggled, () => {
   if (removed.length) {
     emit('interaction', {type:'removedToggle', data: JSON.stringify(removed)});
   }
-
 });
 
 
@@ -115,12 +120,15 @@ function addDefaultStyle() {
   document.head.appendChild(style);
 }
 
-onMounted(() => {
-  zoomPanManager = new ZoomPanManager(canvas.value, emitter);
+onBeforeMount(() => {
   emitter.on('zoomPanInteraction', emitInteraction);
   if (props.nodeStyle === 'default') {
     addDefaultStyle();
   }
+});
+
+onMounted(() => {
+  zoomPanManager = new ZoomPanManager(canvas.value, emitter);
 });
 
 onBeforeUnmount(() => {
