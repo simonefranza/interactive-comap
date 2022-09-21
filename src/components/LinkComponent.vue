@@ -4,12 +4,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, reactive, onBeforeUnmount } from 'vue';
+import { ref, onMounted, computed, reactive, onBeforeUnmount, watch } from 'vue';
 import MapNodeComponent from './MapNode.vue';
 
 const props = defineProps<{
-  source: undefined | NodeComponent,
-  target: undefined | NodeComponent,
+  source: NodeComponent,
+  target: NodeComponent,
 }>();
 
 const link = ref();

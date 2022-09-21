@@ -57,11 +57,10 @@ const activeNodes = computed(() => {
 });
 
 const activeConnections = computed(() => {
-  const res = props.connections.filter((conn) => {
+  const res = props.connections.filter((conn : Connection) => {
     return activeNodes.value.find((node) => conn.source === node.title) &&
       activeNodes.value.find((node) => conn.target === node.title) && 
-      nodeComponents.value.find((nodeComp : NodeComponent) => 
-        nodeComp.node.title == conn.target || nodeComp.node.title == conn.source);
+      existsComponent(conn);
   })
   return res;
 });
@@ -71,19 +70,30 @@ const getNodeConnections = (node : MapNode) => {
     return conn.target === node.title || conn.source === node.title;
   });
 }
+
+const existsComponent = (conn : Connection) : Boolean => {
+  return nodeComponents.value.find((nodeComp : NodeComponent) => {
+    return nodeComp.node.title === conn.target;
+  }) !== undefined && 
+  nodeComponents.value.find((nodeComp : NodeComponent) => {
+    return nodeComp.node.title === conn.source;
+  }) !== undefined;
+};
+
+
 const getComponent = (conn : Connection, field : 'source' | 'target') => {
 const res = nodeComponents.value.find((nodeComp : NodeComponent) => {
   return nodeComp.node.title === conn[field];
 });
+if (res === undefined) {
+  throw `Could not find NodeComponent for connection ${conn.source}-${conn.target}`;
+}
 return res;
 }
 
 const emitInteraction = (data : Interaction) => {
   emit('interaction', data);
 };
-watch(links, () => {
-  console.log("new links", links);
-});
 
 watch(props.toggled, () => {
   const added = props.toggled.filter(x => !savedToggled.includes(x));
