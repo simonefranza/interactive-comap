@@ -153,9 +153,9 @@ body, #app {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-areas: "toolbar" "map" "interactions";
-  grid-template-rows: 200px 1fr 150px;
-  grid-template-columns: 1fr;
+  grid-template-areas: "toolbar toolbar" "map interactions";
+  grid-template-rows: 200px 1fr;
+  grid-template-columns: 3fr 1fr;
 }
 .toolbar-container {
   grid-area: toolbar;
@@ -175,7 +175,7 @@ body, #app {
 }
 .comap-container {
   grid-area: map;
-  outline: 1px solid #eee;
+  border: 1px solid #eee;
   border-radius:1rem;
   margin: 1rem;
 }
@@ -202,14 +202,14 @@ body, #app {
   padding-block: 0.5rem;
   padding-inline: 1.2rem;
   max-width: 300px;
-  outline: 1px solid palevioletred;
+  border: 1px solid palevioletred;
 }
 .map-node.old{
   background-image: linear-gradient(133deg, darkviolet, #5f0b83);
 }
 .map-node.clicked {
   background-image: linear-gradient(73deg, darkviolet, #5f0b83);
-  outline: 1px solid darkviolet;
+  border: 1px solid darkviolet;
 }
 .node-title.clicked {
   font-weight: bold;

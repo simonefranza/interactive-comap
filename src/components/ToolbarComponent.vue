@@ -200,7 +200,7 @@ onMounted(() => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  outline: 1px solid white;
+  border: 1px solid white;
   padding: 0.5rem;
   border-radius: 1rem;
 }
@@ -232,7 +232,7 @@ onMounted(() => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  outline: 1px solid white;
+  border: 1px solid white;
   padding: 0.5rem;
   border-radius: 1rem;
   justify-content: flex-start;
@@ -252,7 +252,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   text-align: left;
-  outline: 1px solid white;
+  border: 1px solid white;
   padding: 0.5rem;
   border-radius: 1rem;
 }
@@ -286,7 +286,7 @@ input[type="file"] {
   margin: 0em;
 
   &:focus, &:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
+    border: 4px auto -webkit-focus-ring-color;
   }
   &:hover {
     border-color: #646cff;
@@ -300,7 +300,7 @@ input[type="file"] {
   transform: translate(-50%, -50%);
   background: #ddd;
   padding: 1rem;
-  outline: black;
+  border: black;
   border-radius: 1rem;
   min-height: 100px;
   display: flex;

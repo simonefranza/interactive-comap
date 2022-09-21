@@ -153,6 +153,7 @@ onMounted(() => {
   left: 0;
   padding: 2px;
   user-select: none;
+  -webkit-user-select: none;
   overflow: visible;
   cursor: pointer;
 }

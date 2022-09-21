@@ -135,4 +135,10 @@ onBeforeUnmount(() => {
   height: 100%;
   position: relative;
 }
+.map-container {
+  z-index: 100;
+}
+.map { 
+  z-index: 1000;
+}
 </style>
