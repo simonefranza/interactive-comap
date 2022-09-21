@@ -132,6 +132,7 @@ async function resetPosition() {
   nodeContainer.value.style.transitionProperty = 'x,y';
   nodeContainer.value.style.transitionDuration = '0.3s';
   nodeContainer.value.style.transitionTimingFunction = 'linear';
+  console.log(nodeContainer.value.style);
   await nextTick();
 
   let viewBox = canvas.getAttribute("viewBox");
