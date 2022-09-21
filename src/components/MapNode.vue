@@ -145,15 +145,13 @@ async function resetPosition() {
   const bounding = canvas.getBoundingClientRect();
   setSvgPosition(viewBoxSplit, bounding);
   setInterval(() => {
+    if (nodeContainer.value === undefined) {
+      return;
+    }
     nodeContainer.value.style.transitionProperty = '';
     nodeContainer.value.style.transitionDuration = '';
     nodeContainer.value.style.transitionTimingFunction = '';
   }, 1000);
-}
-
-function transitionEndCallback(callback) {
-  callback();
-  nodeContainer.value?.removeEventListener('transitionend', transitionEndCallback(callback))
 }
 
 onMounted(() => {
