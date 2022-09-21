@@ -1,0 +1,303 @@
+{
+  "nodes": [
+    {
+      "title": "body posture",
+      "toggler": "Abstract",
+      "description": "Body posture refers to the positioning of a person's body. Different positions are defined by different names, all of which are different body postures, for example upright or right-leaning standing posture.",
+      "url": "https://www.workplacetesting.com/definition/2624/body-posture",
+      "nx": 461.0706787109375,
+      "ny": -287.7810974121094
+    },
+    {
+      "title": "mental-number-line theory",
+      "toggler": "Abstract",
+      "description": "Humans seem to represent numbers as different visual-spatial shapes, usually along a horizontal continuum. Smaller numbers are aligned on the left side of the continuum and larger numbers on the right side - this is the so-called 'mental number line'.",
+      "url": "https://www.nature.com/articles/021252a0",
+      "nx": 446.59259033203125,
+      "ny": -100.96159362792969
+    },
+    {
+      "title": "magnitude estimates",
+      "toggler": "Intro",
+      "description": "Magnitude estimation is a scaling method used to assess quantitative judgements and ratios. For example, if a reference brightness is given a value of 50, a light that is subjectively perceived as twice as bright should be given a value of 100.",
+      "url": "https://psychology.fandom.com/wiki/Magnitude_estimation",
+      "nx": 200,
+      "ny": 90
+    },
+    {
+      "title": "memory retrieval",
+      "toggler": "Intro",
+      "description": "Memory retrieval or recall is remembering information or events that were previously encoded and stored in the brain.",
+      "url": "https://human-memory.net/memory-recall-retrieval/",
+      "nx": -86.7637939453125,
+      "ny": 85.57057189941406
+    },
+    {
+      "title": "anchoring-and-adjustment heuristic",
+      "toggler": "Intro",
+      "description": "The anchoring and adjustment heuristic describes cases in which a person uses a specific target number or value as a starting point, known as an anchor, and subsequently adjusts that information until an acceptable  value is reached over time. Often, those adjustments are inadequate and remain too close to the original anchor, which is a problem when the  anchor is very different from the true answer. For example: During hiring negotiations, a hiring manager might consider offering a very low compensation package to a prospective candidate. Now, because of the lower starting point, the candidate might end up joining at a relatively lower initial salary even after several rounds of negotiation.",
+      "url": "https://www.investopedia.com/terms/a/anchoring-and-adjustment.asp",
+      "nx": -419.375244140625,
+      "ny": 85.90848541259766
+    },
+    {
+      "title": "anchoring process",
+      "toggler": "Intro",
+      "description": "The anchoring process is a cognitive bias whereby individual's decisions are influenced by a particular reference point or 'anchor'. Once the value of the anchor is set, subsequent arguments, estimates,  etc. made by an individual may change from what they would have otherwise been without the anchor. For example, an individual may be more likely to purchase a car if it is placed alongside a more expensive model (the anchor). Prices discussed in negotiations that are lower than the anchor may seem reasonable, perhaps even cheap to the buyer, even if said prices are still relatively higher than the actual market  value of the car.",
+      "url": "https://en.wikipedia.org/wiki/Anchoring_(cognitive_bias)",
+      "nx": -781.4785079956055,
+      "ny": 86.75914001464844
+    },
+    {
+      "title": "experiment",
+      "toggler": "Experiment 1 - Participants",
+      "description": "An experiment is a procedure carried out to support or refute a hypothesis or determine the efficacy or likelihood of something previously untried. Experiments provide insight into cause-and-effect  by demonstrating what outcome occurs when a particular factor is  manipulated.  Experiments vary greatly in goal and scale but always rely  on a repeatable procedure and logical or statistical analysis of the results.",
+      "url": "https://en.wikipedia.org/wiki/Experiment",
+      "nx": 172.53466796875,
+      "ny": -166.53514099121094
+    },
+    {
+      "title": "participants",
+      "toggler": "Experiment 1 - Participants",
+      "description": "A research participant is a person who voluntarily participates in human subject research after giving informed consent to be the subject of the research.",
+      "url": "https://en.wikipedia.org/wiki/Research_participant",
+      "nx": -10.914105415344238,
+      "ny": -165.4244842529297
+    },
+    {
+      "title": "right-handed",
+      "toggler": "Experiment 1 - Participants",
+      "description": "Someone who is right-handed uses their right hand rather than their left hand for activities such as writing and sports, and for picking things up.",
+      "url": "https://www.collinsdictionary.com/de/worterbuch/englisch/right-handed",
+      "nx": -250,
+      "ny": -168
+    },
+    {
+      "title": "apparatus",
+      "toggler": "Experiment 1 - Apparatus",
+      "description": "Apparatus broadly refers to the equipment, machinery, or structure that is necessary for a  particular purpose or activity. In psychology, this means the equipment or measures that are necessary for conducting research.",
+      "url": "https://alleydog.com/glossary/definition.php?term=Appartus",
+      "nx": 167.4610595703125,
+      "ny": -300.1462097167969
+    },
+    {
+      "title": "Wii Balance Board",
+      "toggler": "Experiment 1 - Apparatus",
+      "description": "The Wii Balance Board is an accessory for the Wii and Wii U video game consoles. Unlike the usual balance board for exercises, it does not shake but tracks the user's centre of balance.",
+      "url": "https://en.wikipedia.org/wiki/Wii_Balance_Board",
+      "nx": 252.50250244140625,
+      "ny": -431.5104064941406
+    },
+    {
+      "title": "center of pressure (COP)",
+      "toggler": "Experiment 1 - Apparatus",
+      "description": "In biomechanics, the centre of pressure (CoP) is the term for the point of application of the ground reaction force vector. Analysis of the centre of pressure is common in studies of human posture control and walking. It is assumed that changes in motor control are reflected in changes in the centre of pressure.",
+      "url": "https://en.wikipedia.org/wiki/Center_of_pressure_(terrestrial_locomotion)",
+      "nx": 606.3268737792969,
+      "ny": -446.97802734375
+    },
+    {
+      "title": "estimation questions",
+      "toggler": "Experiment 1 - Materials",
+      "description": "Estimation questions, also known as guesstimate questions, are a broader toggler of interview questions that ask you to guess a particular value.",
+      "url": "https://hackingthecaseinterview.thinkific.com/pages/market-sizing",
+      "nx": 136.702392578125,
+      "ny": -59.332427978515625
+    },
+    {
+      "title": "magnitude of displacement",
+      "toggler": "Experiment 1 - Materials",
+      "description": "Magnitude of displacement is equal to the linear distance between initial and final positions along the straight line joining two positions i.e. the shortest distance between initial and  final positions.",
+      "url": "https://cnx.org/contents/5183e995-a1fb-47a0-b9ce-99fd487393d8:d567a16b-34f8-4681-bd95-ff119a1fb8f3",
+      "nx": 535.9053955078125,
+      "ny": 84.5270881652832
+    },
+    {
+      "title": "analysis",
+      "toggler": "Experiment 1 - Results",
+      "description": "Analysis is the process of breaking a complex topic or substance into smaller parts in order to gain a better understanding of it.",
+      "url": "https://en.wikipedia.org/wiki/Analysis",
+      "nx": -67.23591613769531,
+      "ny": -280.76409912109375
+    },
+    {
+      "title": "single dimension",
+      "toggler": "Experiment 1 - Results",
+      "description": "In physics and mathematics, a sequence of n numbers can speciny a location in n-dimensional space. When n = 1, the set of all such locations is called a one-dimensional space or a single dimension. An example of a one-dimensional space is the number line, where the position of each point on it can be described by a single number",
+      "url": "Translated from https://de.wikipedia.org/wiki/1D",
+      "nx": -131.11101913452148,
+      "ny": -60.2650032043457
+    },
+    {
+      "title": "within and between-subjects factors",
+      "toggler": "Experiment 1 - Results",
+      "description": "A within-subjects variable or factor is an independent variable that is manipulated by testing each subject at each level of the variable. For example, if an experiment is conducted comparing four methods of teaching vocabulary, and if each of the four teaching methods is used with the same group of subjects, then the teaching method is a within-subjects variable. A between-subjects variable is one in which different groups of subjects are used for each level of the variable. If an experiment is conducted comparing four methods of teaching vocabulary, and if four different groups of subjects are used for each of the four teaching methods, then the teaching method is a between-subjects variable.",
+      "url": "https://onlinestatbook.com/glossary/within-subjects.html & https://onlinestatbook.com/glossary/between-subjects.html",
+      "nx": -356.989501953125,
+      "ny": -491.0563659667969
+    },
+    {
+      "title": "mixed analysis of variance (ANOVA)",
+      "toggler": "Experiment 1 - Results",
+      "description": "In statistics, a mixed-design analysis of variance model, also known as a split-plot ANOVA, is used to test for differences between two or more independent groups while participants are undergoing repeated measures. Thus, in a mixed-design ANOVA model, one factor (a fixed effects factor) is a between-subjects variable. The other (a random effects factor) is a within-subjects variable.  Thus, overall, the model is a type of mixed-effects model. A repeated measures  design is used when multiple independent variables or measures exist in  a data set, but all participants have been measured on each variable.",
+      "url": "https://en.wikipedia.org/wiki/Mixed-design_analysis_of_variance",
+      "nx": -240,
+      "ny": -380
+    },
+    {
+      "title": "z-transformed",
+      "toggler": "Experiment 1 - Results",
+      "description": "The z-transformation is a standardisation process that enables the comparison of values from different distributions. Using a distribution mean and standard deviation, the z-transformation transforms different distributions into a standardised distribution, allowing the comparison of different metrics. The standardised distribution includes z-scores, hence the term z-transformation.",
+      "url": "https://methods.sagepub.com/reference/the-sage-encyclopedia-of-communication-research-methods/i15828.xml",
+      "nx": -532.5149841308594,
+      "ny": -261.0735778808594
+    },
+    {
+      "title": "significant main effect",
+      "toggler": "Experiment 1 - Results",
+      "description": "Main effect is a statistical term used in the contitle of experimental designs and their analysis. In statistical analysis of variance, which is often used to analyse data collected using a design of experiment, the main effect is the statistically significant difference between the levels of an independent variable (the variable used to try to model the dependent variable) and a dependent variable (the variable whose value depends on the effect of another variable), without taking into account the influence of other factors.",
+      "url": "https://methods.sagepub.com/reference/encyclopedia-of-survey-research-methods/n283.xml",
+      "nx": -696.7677001953125,
+      "ny": -380
+    },
+    {
+      "title": "error variance",
+      "toggler": "Experiment 2 - Results",
+      "description": "Error variance is the statistical variability in results caused by the influence of variables other than the independent (i.e. target) variable. It is difficult to control for all influencing variables.",
+      "url": "https://www.dept.psu.edu/liberalarts/sites/cogsci/oldsite/teaching/psy200/ResearchMethods/ErrorVariance.html",
+      "nx": -34.71644306182861,
+      "ny": -491.45172119140625
+    },
+    {
+      "title": "bias",
+      "toggler": "Discussion",
+      "description": "Bias is disproportionate weight in favour of or against an idea or thing, usually in a closed-minded, prejudicial, or unfair way. Biases can be innate or learned. People may develop biases for or against an individual, a group, or a belief. In science and engineering, a bias is a systematic error.",
+      "url": "https://en.wikipedia.org/wiki/Bias",
+      "nx": -250,
+      "ny": -283
+    },
+    {
+      "title": "dominant hand",
+      "toggler": "Discussion",
+      "description": "In human biology, handedness is an individual's preferential use of one hand, known as the dominant hand, due to it being stronger, faster or better in dexterity. The other hand, comparatively often the weaker, less dextrous or simply less subjectively preferred, is called the non-dominant hand.",
+      "url": "https://en.wikipedia.org/wiki/Handedness",
+      "nx": -462.61248779296875,
+      "ny": -166.94438934326172
+    },
+    {
+      "title": "evidence",
+      "toggler": "Discussion",
+      "description": "Evidence for a statement is that which supports that statement. It is usually understood as an indication that the supporting statement is true (e.g. supported by data).",
+      "url": "https://en.wikipedia.org/wiki/Evidence",
+      "nx": -912.2120361328125,
+      "ny": -381.80657958984375
+    }
+  ],
+  "connections": [
+    {
+      "source": "within and between-subjects factors",
+      "target": "mixed analysis of variance (ANOVA)"
+    },
+    {
+      "source": "mixed analysis of variance (ANOVA)",
+      "target": "error variance"
+    },
+    {
+      "source": "mixed analysis of variance (ANOVA)",
+      "target": "significant main effect"
+    },
+    {
+      "source": "significant main effect",
+      "target": "evidence"
+    },
+    {
+      "source": "mixed analysis of variance (ANOVA)",
+      "target": "z-transformed"
+    },
+    {
+      "source": "mixed analysis of variance (ANOVA)",
+      "target": "analysis"
+    },
+    {
+      "source": "analysis",
+      "target": "bias"
+    },
+    {
+      "source": "bias",
+      "target": "right-handed"
+    },
+    {
+      "source": "right-handed",
+      "target": "dominant hand"
+    },
+    {
+      "source": "participants",
+      "target": "right-handed"
+    },
+    {
+      "source": "analysis",
+      "target": "experiment"
+    },
+    {
+      "source": "experiment",
+      "target": "participants"
+    },
+    {
+      "source": "experiment",
+      "target": "estimation questions"
+    },
+    {
+      "source": "estimation questions",
+      "target": "single dimension"
+    },
+    {
+      "source": "estimation questions",
+      "target": "magnitude estimates"
+    },
+    {
+      "source": "experiment",
+      "target": "apparatus"
+    },
+    {
+      "source": "apparatus",
+      "target": "Wii Balance Board"
+    },
+    {
+      "source": "Wii Balance Board",
+      "target": "center of pressure (COP)"
+    },
+    {
+      "source": "center of pressure (COP)",
+      "target": "body posture"
+    },
+    {
+      "source": "body posture",
+      "target": "mental-number-line theory"
+    },
+    {
+      "source": "experiment",
+      "target": "mental-number-line theory"
+    },
+    {
+      "source": "mental-number-line theory",
+      "target": "magnitude estimates"
+    },
+    {
+      "source": "magnitude estimates",
+      "target": "magnitude of displacement"
+    },
+    {
+      "source": "magnitude estimates",
+      "target": "memory retrieval"
+    },
+    {
+      "source": "memory retrieval",
+      "target": "anchoring-and-adjustment heuristic"
+    },
+    {
+      "source": "anchoring-and-adjustment heuristic",
+      "target": "anchoring process"
+    }
+  ]
+}
+
