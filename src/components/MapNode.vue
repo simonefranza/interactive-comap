@@ -83,7 +83,6 @@ const setSvgSize = (viewBoxSplit : [number, number, number, number], bounding : 
   const [ width, height ] = Utils.convertPixelDistanceToUnit(viewBoxSplit,
     bounding,
     [ divBounding.width + 4, divBounding.height + 4]);
-    console.log('divBounding', divBounding.width, divBounding.height, width, height);
   nodeContainer.value.setAttribute("width", `${width}`);
   nodeContainer.value.setAttribute("height", `${height}`);
   nodeContainer.value.style.height = "";
