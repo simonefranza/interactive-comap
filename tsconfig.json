@@ -14,7 +14,6 @@
     "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types",
-      "type.d.ts"
     ],
   },
 }

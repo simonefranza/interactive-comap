@@ -36,7 +36,9 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, watch } from 'vue';
-import InteractiveComap from './components/InteractiveComap.vue';
+//import InteractiveComap from '../lib/InteractiveComap.vue';
+import { InteractiveComap } from 'vue-interactive-comap';
+//import 'interactive-comap/dist/style.css';
 import ToolbarComponent from './components/ToolbarComponent.vue';
 import { nodes, connections, toggled } from '../public/data';
 

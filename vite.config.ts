@@ -4,12 +4,11 @@ import * as path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base : "/interactive-comap/",
   plugins : [ vue() ],
+  base : "/interactive-comap/",
   resolve : {
     alias : {
       "@" : path.resolve(__dirname, "./src")
     },
   },
-
 })
