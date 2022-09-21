@@ -4,7 +4,7 @@
     class="map-node-container">
     <div 
       ref="nodeDiv"
-      :class="['map-node', {'clicked' : clicked}, {'old' : old}]">
+      :class="['map-node','sane-node', {'clicked' : clicked}, {'old' : old}]">
       <span>
         <div :class="['node-title', {'clicked' : clicked}]">{{node.title}}</div>
         <div class="node-description" v-if="clicked">{{node.description}}
@@ -77,14 +77,15 @@ const setSvgSize = (viewBoxSplit : [number, number, number, number], bounding : 
     throw "nodeDiv is undefined";
   }
 
-  nodeContainer.value.style.height = "100%";
-  nodeContainer.value.style.width = "100%";
+  nodeContainer.value.setAttribute("width", `600`);
+  nodeContainer.value.setAttribute("height", `500`);
   const divBounding = nodeDiv.value.getBoundingClientRect();
   const [ width, height ] = Utils.convertPixelDistanceToUnit(viewBoxSplit,
     bounding,
-    [ divBounding.width, divBounding.height ]);
-  nodeContainer.value.setAttribute("width", `${width + 4}`);
-  nodeContainer.value.setAttribute("height", `${height + 4}`);
+    [ divBounding.width + 4, divBounding.height + 4]);
+    console.log('divBounding', divBounding.width, divBounding.height, width, height);
+  nodeContainer.value.setAttribute("width", `${width}`);
+  nodeContainer.value.setAttribute("height", `${height}`);
   nodeContainer.value.style.height = "";
   nodeContainer.value.style.width = "";
 };
@@ -156,5 +157,14 @@ onMounted(() => {
   -webkit-user-select: none;
   overflow: visible;
   cursor: pointer;
+}
+div.sane-node {
+  cursor: pointer;
+  z-index: 2000;
+  pointer-events: all;
+  position: static;
+  box-sizing: border-box;
+  display: inline-block;
+
 }
 </style>
