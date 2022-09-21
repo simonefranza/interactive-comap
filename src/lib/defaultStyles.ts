@@ -4,7 +4,7 @@ export const defaultStyle = `
   color: #eee;
   border-radius: 0.5rem;
   background-image: linear-gradient(133deg, salmon, #5f0b83);
-  max-width: 400px;
+  max-width: 200px;
   border: 1px solid palevioletred;
   padding-block: 0.5rem;
   padding-inline: 1.2rem;
@@ -15,6 +15,7 @@ export const defaultStyle = `
 .map-node.clicked {
   background-image: linear-gradient(73deg, darkviolet, #5f0b83);
   border: 1px solid darkviolet;
+  max-width: 400px;
 }
 .node-title.clicked {
   font-weight: bold;

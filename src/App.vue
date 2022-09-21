@@ -22,7 +22,9 @@
         :toggled="toggledCopy"
         :nodeStyle="'default'"
         @interaction="handleInteraction"
+        ref="intCoMap"
       />
+      <button class="btn floaty reset-btn" @click="resetNodes">Reset Position</button>
     </span>
     <div class="interactions-container">
       <div class="interactions-title">Interactions</div>
@@ -42,6 +44,7 @@ const interactions : string[] = reactive([]);
 const toggledCopy = ref([...toggled]);
 const usedNodes = ref([...nodes]);
 const usedConnections = ref([...connections]);
+const intCoMap = ref();
 
 const handleInteraction = ({type, node, data} : Interaction) => {
   const date = new Date().toLocaleDateString("de-AT", 
@@ -131,6 +134,11 @@ function addConnection(conn: Connection) {
   usedConnections.value.push(conn);
 }
 
+const resetNodes = () => {
+  console.log(intCoMap.value);
+  intCoMap.value.resetNodes();
+}
+
 watch(usedNodes, () => {
   parseToggles(usedNodes.value);
 });
@@ -154,11 +162,14 @@ body, #app {
   margin: 0;
   display: grid;
   grid-template-areas: "toolbar toolbar" "map interactions";
-  grid-template-rows: 200px 1fr;
+  grid-template-rows: 230px 1fr;
   grid-template-columns: 3fr 1fr;
 }
 .toolbar-container {
   grid-area: toolbar;
+  max-width: 100vw;
+  overflow: scroll;
+  scroll-behavior: smooth;
 }
 .interactions-container {
   border-radius: 1rem;
@@ -178,6 +189,7 @@ body, #app {
   border: 1px solid #eee;
   border-radius:1rem;
   margin: 1rem;
+  position: relative;
 }
 .interactions-title {
   background: #eee;
@@ -187,5 +199,9 @@ body, #app {
   font-size: 1.5rem;
   padding-block: 0.5rem;
   top: 0;
+}
+
+.reset-btn {
+  z-index: 20000;
 }
 </style>

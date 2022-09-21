@@ -26,10 +26,10 @@
     <div class="list-container">
       <span class="title">Nodes</span>
       <div class="list">
-        <span v-for="node in nodes" :key="node.title">
+        <div v-for="node in nodes" :key="node.title">
           <img alt="X" src="/assets/close-icon.svg" @click="removeNode(node)"/>
           <label for="tog">{{node.title}}</label>
-        </span>
+        </div>
       </div>
     </div>
     <div class="list-container">
@@ -203,9 +203,11 @@ onMounted(() => {
   border: 1px solid white;
   padding: 0.5rem;
   border-radius: 1rem;
+  box-sizing: border-box;
 }
 .list {
   height: 100%;
+  width: max-content;
   overflow: scroll;
   display: flex;
   flex-direction: column;
@@ -214,6 +216,7 @@ onMounted(() => {
   position: relative;
   gap: 0.5rem;
   text-align: left;
+  padding-right: 10px;
   & img {
     width: 1rem;
     cursor: pointer;
@@ -222,8 +225,11 @@ onMounted(() => {
     transform: translateY(-50%);
     visibility: hidden;
   }
-  & span:hover img {
+  & div:hover img {
     visibility: initial;
+  }
+  & div {
+    width: 100%;
   }
 }
 
@@ -238,6 +244,7 @@ onMounted(() => {
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+  box-sizing: border-box;
 }
 
 .file-upload {
@@ -255,6 +262,7 @@ onMounted(() => {
   border: 1px solid white;
   padding: 0.5rem;
   border-radius: 1rem;
+  box-sizing: border-box;
 }
 
 input[type="file"] {

@@ -1,5 +1,8 @@
 <template>
-  <path ref="link" class="node-link" :d="path">
+  <path 
+    ref="link" 
+    :style="{'transition': useTransition ? customTransition: ''}"
+    class="node-link" :d="path">
   </path>
 </template>
 
@@ -10,9 +13,11 @@ import MapNodeComponent from './MapNode.vue';
 const props = defineProps<{
   source: NodeComponent,
   target: NodeComponent,
+  useTransition: Boolean,
 }>();
 
 const link = ref();
+const customTransition = ref('d .3s linear');
 
 const sourcePos : ScreenPosition = reactive({ x : 0, y : 0, });
 const targetPos : ScreenPosition = reactive({ x : 0, y : 0, });
@@ -49,6 +54,7 @@ const observer = new MutationObserver(function(mutations) {
     }
   });
 });
+
 onMounted(() => {
   if (link.value === undefined || props.source === undefined || props.target === undefined) {
     return;

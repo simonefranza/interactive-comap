@@ -24,6 +24,7 @@ type Connection = {
 type NodeComponent = {
   node : MapNode,
   nodeContainer : import('src/components/MapNode.vue'),
+  resetPosition : () => void,
 }
 
 type ScreenPosition = {

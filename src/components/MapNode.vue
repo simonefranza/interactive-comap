@@ -122,7 +122,39 @@ const emitInteraction = (int : Interaction) => {
 defineExpose({
   nodeContainer,
   node: props.node,
+  resetPosition
 });
+
+async function resetPosition() {
+  if (nodeContainer.value === undefined) {
+    return;
+  }
+  nodeContainer.value.style.transitionProperty = 'x,y';
+  nodeContainer.value.style.transitionDuration = '0.3s';
+  nodeContainer.value.style.transitionTimingFunction = 'linear';
+  await nextTick();
+
+  let viewBox = canvas.getAttribute("viewBox");
+  if (viewBox === undefined || viewBox === null) {
+    const size = canvas.getBoundingClientRect();
+    canvas.setAttribute('viewBox', `0 0 ${size?.width} ${size?.height}`);
+    viewBox = `0 0 ${size?.width} ${size?.height}`;
+  }
+  const viewBoxSplit = viewBox.split(" ")
+    .map((el : string) => parseFloat(el)) as [number, number, number, number];
+  const bounding = canvas.getBoundingClientRect();
+  setSvgPosition(viewBoxSplit, bounding);
+  setInterval(() => {
+    nodeContainer.value.style.transitionProperty = '';
+    nodeContainer.value.style.transitionDuration = '';
+    nodeContainer.value.style.transitionTimingFunction = '';
+  }, 1000);
+}
+
+function transitionEndCallback(callback) {
+  callback();
+  nodeContainer.value?.removeEventListener('transitionend', transitionEndCallback(callback))
+}
 
 onMounted(() => {
   const tempCanvas = nodeContainer.value?.parentElement;

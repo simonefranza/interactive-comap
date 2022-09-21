@@ -6,6 +6,7 @@
         :key="conn.source + conn.target"
         :source="getComponent(conn, 'source')"
         :target="getComponent(conn, 'target')"
+        :useTransition="enableLinkTransition"
         ref="links"
       >
       </link-component>
@@ -40,12 +41,17 @@ const props = defineProps<{
   nodeStyle: 'custom' | 'default',
 }>();
 
+defineExpose({
+  resetNodes,
+});
+
 const emitter = mitt<ZoomPanEvents>();
 
 const canvas = ref();
-const nodeComponents = ref([]);
+const nodeComponents = ref<NodeComponent[]>([]);
 const links = ref([]);
 let savedToggled : string[] = [];
+const enableLinkTransition = ref(false);
 
 let zoomPanManager : ZoomPanManager;
 
@@ -78,6 +84,19 @@ const existsComponent = (conn : Connection) : Boolean => {
     return nodeComp.node.title === conn.source;
   }) !== undefined;
 };
+
+async function resetNodes() {
+  enableLinkTransition.value = true;
+  await nextTick();
+  for (let i = 0; i < nodeComponents.value.length; i++) {
+    nodeComponents.value[i].resetPosition();
+  }
+  emit('interaction', {type: 'positionReset'});
+  await nextTick();
+  setTimeout(() => {
+    enableLinkTransition.value = false;
+  }, 1000);
+}
 
 
 watch(activeNodes, async () => {
