@@ -35,10 +35,10 @@
     <div class="list-container">
       <span class="title">Connections</span>
       <div class="list">
-        <span v-for="conn in connections" :key="conn.source + '-' + conn.target">
+        <div v-for="conn in connections" :key="conn.source + '-' + conn.target">
           <img alt="X" src="/assets/close-icon.svg" @click="removeConnection(conn)"/>
           <label for="tog">{{conn.source}} - {{conn.target}}</label>
-        </span>
+        </div>
       </div>
     </div>
     <div class="list-container">

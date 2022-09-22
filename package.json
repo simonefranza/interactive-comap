@@ -13,7 +13,7 @@
     "mitt": "^3.0.0",
     "vite-plugin-css-injected-by-js": "^2.1.0",
     "vue": "^3.2.37",
-    "vue-interactive-comap": "^0.2.1"
+    "vue-interactive-comap": "file:vue-interactive-comap-1.0.1.tgz"
   },
   "devDependencies": {
     "@types/node": "^18.7.18",
